@@ -1,10 +1,7 @@
 """
-Drone delivery:
-we are going to build a mission in mission planner, upload the mission to the drone.
-The script will connect with the vehicle and check if a new mission has been uploaded.
-As soon as a valid mission is available, we takeoff in GUIDED mode and then we switch
-to AUTO.
-When the mission is completed we command to co back to home and land
+On Mission Planner we create the mission. Add 4 waypoint as you like. Take off and
+then drone will automatically flying to the waypoint. If done then Return to Launch
+and landing.
 """
 
 import time

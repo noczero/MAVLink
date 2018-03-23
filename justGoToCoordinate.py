@@ -1,7 +1,15 @@
+"""
+Drone taking off and reach target altitude. And then go to the given coordinates on the
+table. If done then Return to Launch and landing.
+"""
+
 from dronekit import connect, VehicleMode, LocationGlobalRelative
 import time
 import math
 
+# ----
+# FUNCTIONS
+# ----
 # to calculate distance
 def get_distance_metres(aLocation1, aLocation2):
     """
@@ -40,10 +48,17 @@ def armingAndTakeOff(targetAltitude):
         time.sleep(1)
     print ("Current Altitude has reached %s" )% targetAltitude
 
+
+# ----
+# INITIALIZE
+# ----
 # create vehicle object
 sitl_ip = 'udp:127.0.0.1:14551'
 myVehicle = connect(sitl_ip, wait_ready=True)
 
+# ----
+# MAIN FUNCTION
+# ----
 #call the function to arming and takeoff
 armingAndTakeOff(10) #with the altitude
 
@@ -57,15 +72,9 @@ airSpeed = 30
 print ("Set airspeed %d" )% airSpeed
 myVehicle.airspeed = airSpeed #set airspeed
 
-# define first coordinate
-point1 = LocationGlobalRelative(-6.9715063, 107.6290657, 35)
-
 print("Go to point 1")
 myVehicle.simple_goto(point1)
-# sleep so we can see the change in map
 finished = False
-prevLocation = None
-
 while not finished:
     print("waiting...")
     currentGlobalRelative = myVehicle.location.global_relative_frame
@@ -94,7 +103,7 @@ while not finished:
 
     time.sleep(1)
 
-#when finished
+# when finished
 myVehicle.mode = VehicleMode("RTL")
 
 # Close vehicle object
